@@ -3,22 +3,47 @@ title: CodeEtch API
 version: v1
 baseUri: http://api.codeEtch.com
 types:
-  TestType:
+  Url: string
+  User:
     type: object
     properties:
-      id: number
-      optional?: string
-      expanded:
-        type: object
-        properties:
-          count: number
-/helloWorld:
-  get:
-    responses:
-      200:
-        body:
-          application/json:
-            example: |
-              {
-                "message" : "Hello World"
-              }
+
+  Repository:
+    type: object
+    properties:
+      repoUrl: Url
+      name: string
+      owner: User
+
+/repositories:
+  post:
+    description: Create a new repository on the server
+    body:
+      application/json:
+        type:
+          Url
+        example:
+          "https://github.com/CodeEtch/backend.git"
+  /{repository_id}/packages:
+    get:
+      description: Get all the packages in the repository
+
+/packages:
+  /{package_id}:
+    get:
+
+/classes:
+  /{class_id}:
+    get:
+    /attributes:
+      get:
+    /methods:
+      get:
+
+/relationships:
+  /repositories/{repository_id}:
+    get:
+  /packages/{package_id}:
+    get:
+  /classes/{class_id}:
+    get:
